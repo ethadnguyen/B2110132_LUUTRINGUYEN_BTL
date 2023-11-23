@@ -3,7 +3,7 @@ export const state = () => ({
   cart: [],
   cartLength: 0,
   shippingPrice: 0,
-  shippingEstimatedDelivery: ""
+  shippingEstimatedDelivery: "",
 });
 
 export const actions = {
@@ -109,5 +109,8 @@ export const getters = {
   },
   getEstimatedDelivery(state) {
     return state.shippingEstimatedDelivery;
-  }
+  },
+  isAuthenticated(state) {
+    return state.auth.loggedIn;
+  },
 };

@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const mongooseAlgolia = require("mongoose-algolia");
+const moment = require("moment");
 const Schema = mongoose.Schema;
 
 const ProductSchema = new Schema(
@@ -11,7 +11,8 @@ const ProductSchema = new Schema(
         photo: String,
         price: Number,
         stockQuantity: Number,
-        reviews: [{ type: Schema.Types.ObjectId, ref: "Review" }]
+        reviews: [{ type: Schema.Types.ObjectId, ref: "Review" }],
+        createdAt: { type: Date, default: Date.now }
     },
     {
         toObject: { virtuals: true },
@@ -30,23 +31,8 @@ ProductSchema.virtual("averageRating").get(function () {
     return 0;
 });
 
-ProductSchema.plugin(mongooseAlgolia, {
-    appId: process.env.ALGOLIA_APP_ID,
-    apiKey: process.env.ALGOLIA_SECRET,
-    indexName: process.env.ALGOLIA_INDEX_NAME,
-
-    selector: "title _id photo description price rating averageRating owner",
-    populate: {
-        path: "owner reviews"
-    },
-    debug: true,
-    searchableAttributes: ["title"]
+ProductSchema.virtual("formattedCreatedAt").get(function () {
+    return moment(this.createdAt).format("DD-MM-YYYY");
 });
 
-let Model = mongoose.model("Product", ProductSchema);
-Model.syncIndexes();
-// Model.SetAlgoliaSettings({
-//     searchableAttributes: ["title"]
-// });
-
-module.exports = Model;
+module.exports = mongoose.model("Product", ProductSchema);

@@ -101,10 +101,9 @@ const updateUserProfile = async (req, res) => {
         });
 
         if (foundUser) {
-            if (req.body.name) foundUser.name = req.body.name;
-            if (req.body.email) foundUser.email = req.body.email;
-            if (req.body.password) foundUser.password = req.body.password;
-
+            foundUser.name = req.body.name || foundUser.name;
+            foundUser.email = req.body.email || foundUser.email;
+            foundUser.password = req.body.password || foundUser.password;
             await foundUser.save();
 
             res.json({
@@ -121,9 +120,25 @@ const updateUserProfile = async (req, res) => {
     }
 };
 
+const getAllUsers = async (req, res) => {
+    try {
+        const users = await User.find();
+        res.json({
+            success: true,
+            users: users
+        });
+    } catch (err) {
+        res.status(500).json({
+            success: false,
+            message: err.message
+        });
+    }
+};
+
 module.exports = {
     login,
     signup,
     getUserProfile,
-    updateUserProfile
+    updateUserProfile,
+    getAllUsers,
 };

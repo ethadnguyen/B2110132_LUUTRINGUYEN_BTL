@@ -74,7 +74,9 @@ export default {
     },
     async onLogout() {
       await this.$auth.logout();
+      this.$auth.$state.loggedIn = false;
+      this.$router.push("/");
     }
-  }
+  },
 };
 </script>

@@ -19,6 +19,25 @@ const getOrders = async (req, res) => {
     }
 };
 
+const deleteOrder = async (req, res) => {
+    try {
+        let deletedOrder = await Order.remove({ owner: req.decoded._id });
+        if (deletedOrder) {
+            res.json({
+                success: true,
+                message: "Successfully deleted order"
+            });
+        }
+    }
+    catch (err) {
+        res.status(500).json({
+            success: false,
+            message: err.message
+        });
+    }
+};
+
 module.exports = {
-    getOrders
+    getOrders,
+    deleteOrder
 };

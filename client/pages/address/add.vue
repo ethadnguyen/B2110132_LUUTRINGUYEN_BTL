@@ -18,7 +18,7 @@
                   <li class="a-breadcrumb-divider">›</li>
                   <li>
                     <a href="#">
-                      <span>Your Adresses</span>
+                      <span>Your Addresses</span>
                     </a>
                   </li>
                   <li class="a-breadcrumb-divider">›</li>
@@ -34,10 +34,9 @@
               <h2>Add a new address</h2>
               <div class="a-section a-spacing-none a-spacing-top-small">
                 <b>
-                  Or pick up your packages at your convenience from our self-service locations. To add an Amazon Pickup Point or Locker, click
-                  <a
-                    href="#"
-                  >here</a>.
+                  Or pick up your packages at your convenience from our self-service locations. To add an EthadZone Pickup
+                  Point or Locker, click
+                  <a href="#">here</a>.
                 </b>
               </div>
               <!-- Error Message -->
@@ -50,11 +49,8 @@
                   <div class="a-spacing-top-medium">
                     <label style="margin-bottom: 0px;">Country/Region</label>
                     <select class="a-select-option" v-model="country">
-                      <option
-                        v-for="country in countries"
-                        :key="country.alpha2Code"
-                        :value="country.name"
-                      >{{ country.name }}</option>
+                      <option v-for="country in countries" :key="country.alpha2Code" :value="country.name">{{ country.name
+                      }}</option>
                       <option></option>
                     </select>
                   </div>
@@ -66,21 +62,11 @@
                   <!-- Street Address -->
                   <div class="a-spacing-top-medium">
                     <label style="margin-bottom: 0px;">Street Address</label>
-                    <input
-                      type="text"
-                      class="a-input-text"
-                      style="width: 100%;"
-                      placeholder="Street and number, P.O. box, c/o."
-                      v-model="streetAddress1"
-                    />
+                    <input type="text" class="a-input-text" style="width: 100%;"
+                      placeholder="Street and number, P.O. box, c/o." v-model="streetAddress1" />
                     <!-- Street Address 2 -->
-                    <input
-                      type="text"
-                      class="a-input-text a-spacing-top-small"
-                      style="width: 100%;"
-                      placeholder="Apartment, suite, unit, building, floor, etc."
-                      v-model="streetAddress2"
-                    />
+                    <input type="text" class="a-input-text a-spacing-top-small" style="width: 100%;"
+                      placeholder="Apartment, suite, unit, building, floor, etc." v-model="streetAddress2" />
                   </div>
                   <!-- City -->
                   <div class="a-spacing-top-medium">
@@ -100,12 +86,7 @@
                   <!-- Phone Number -->
                   <div class="a-spacing-top-medium">
                     <label style="margin-bottom: 0px;">Phone Number</label>
-                    <input
-                      type="text"
-                      class="a-input-text"
-                      style="width: 100%;"
-                      v-model="phoneNumber"
-                    />
+                    <input type="text" class="a-input-text" style="width: 100%;" v-model="phoneNumber" />
                     <div class="a-section a-spacing-none a-spacing-top-micro">
                       <span class="a-size-mini">May be used to assist delivery</span>
                     </div>
@@ -115,27 +96,17 @@
                   </div>
                   <!-- Delivery Instruction -->
                   <div class="a-spacing-top-medium">
-                    <label
-                      style="margin-bottom: 0px;"
-                    >Do we need additional instructions to find this address?</label>
+                    <label style="margin-bottom: 0px;">Do we need additional instructions to find this address?</label>
                     <textarea
                       placeholder="Provide details such as building description, a nearby landmark, or other navigation instructions"
-                      style="height:6em; width: 100%;"
-                      v-model="deliveryInstructions"
-                    ></textarea>
+                      style="height:6em; width: 100%;" v-model="deliveryInstructions"></textarea>
                   </div>
                   <!-- Security code -->
                   <div class="a-spacing-top-medium">
-                    <label
-                      style="margin-bottom: 0px;"
-                    >Do we need a security code or a call box number to access this building?</label>
-                    <input
-                      type="text"
-                      class="a-input-text"
-                      style="width: 100%;"
-                      placeholder="1234"
-                      v-model="securityCode"
-                    />
+                    <label style="margin-bottom: 0px;">Do we need a security code or a call box number to access this
+                      building?</label>
+                    <input type="text" class="a-input-text" style="width: 100%;" placeholder="1234"
+                      v-model="securityCode" />
                   </div>
                   <div class="a-spacing-top-medium">
                     <label style="margin-bottom: 0px;">Weekend delivery</label>

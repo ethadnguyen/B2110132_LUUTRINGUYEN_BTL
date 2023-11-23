@@ -6,7 +6,7 @@
         <div class="col-sm-4">
           <div class="text-center">
             <nuxt-link to="/">
-              <img src="/img/logo-black.png" />
+              <img src="/img/logo-name.jpg" />
             </nuxt-link>
           </div>
           <form class="mt-4">
@@ -35,7 +35,7 @@
                     v-model="password" />
                   <div class="a-alert-container">
                     <div class="a-alert-content">
-                      Password must be at least 6 characteres
+                      Password must be at least 6 characters
                     </div>
                   </div>
                 </div>
@@ -44,13 +44,13 @@
                   <span class="a-button-primary">
                     <span class="a-button-inner">
                       <span class="a-button-text" @click="onSignup">
-                        Create your Amazon account
+                        Create your EthadZone account
                       </span>
                     </span>
                   </span>
                   <div class="a-row a-spacing-top-medium a-size-small">
                     <b>
-                      By creating an account, you agree to Amazon's
+                      By creating an account, you agree to EthadZone's
                       <a href="#">Conditions of Use</a> and
                       <a href="#">Privacy Notice</a>
                     </b>
@@ -73,6 +73,7 @@
 </template>
 
 <script>
+import Swal from "sweetalert2";
 export default {
   middleware: "auth",
   auth: "guest",
@@ -87,26 +88,43 @@ export default {
   methods: {
     async onSignup() {
       try {
+        // Form validation
+        if (!this.name || !this.email || !this.password) {
+          Swal.fire({
+            icon: 'error',
+            title: 'Validation Error',
+            text: 'Please fill in all the fields',
+          });
+          return;
+        }
+
         let data = {
           name: this.name,
           email: this.email,
-          password: this.password
+          password: this.password,
         };
-        let response = await this.$axios.$post("/api/auth/signup", data);
+        let response = await this.$axios.$post('/api/auth/signup', data);
         console.log(response);
         if (response.success) {
-          this.$auth.loginWith("local", {
+          Swal.fire({
+            icon: 'success',
+            title: 'Registration Successful',
+            text: 'You have successfully registered!',
+          });
+
+          this.$auth.loginWith('local', {
             data: {
               email: this.email,
-              password: this.password
-            }
+              password: this.password,
+            },
           });
-          this.$router.push("/");
+          this.$auth.$state.loggedIn = true;
+          this.$router.push('/');
         }
       } catch (err) {
         console.log(err);
       }
-    }
+    },
   }
 };
 </script>

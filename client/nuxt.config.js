@@ -67,7 +67,7 @@ export default {
     /*
     ** You can extend webpack config here
     */
-    extend (config, ctx) {
+    extend(config, ctx) {
     }
   },
   auth: {
@@ -79,7 +79,8 @@ export default {
           },
           logout: true
         }
-      }
+      },
+      watchLoggedIn: true,
     }
   }
 }

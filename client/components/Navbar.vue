@@ -7,7 +7,7 @@
           <div class="col-sm-2">
             <div class="logo-area">
               <nuxt-link to="/">
-                <img src="/img/logo.png" alt="Logo" class="img-fluid" />
+                <img src="/img/logo4.png" alt="Logo" class="img-fluid" />
               </nuxt-link>
             </div>
           </div>
@@ -49,7 +49,6 @@
               <div class="nav-xshop-container">
                 <div class="nav-xshop">
                   <a href="#" class="nav-a">Today's deals</a>
-                  <a href="#" class="nav-a">Your amazon.com</a>
                   <a href="#" class="nav-a">Gift cards</a>
                   <a href="#" class="nav-a">Registry</a>
                   <a href="#" class="nav-a">Sell</a>
@@ -90,7 +89,7 @@
                   </span>
                 </nuxt-link>
               </template>
-              <nuxt-link to="/orders" class="nav-a nav-a-2 nav-single-row-link">
+              <nuxt-link to="/orders" class="nav-a nav-a-2 nav-single-row-link" v-if="$auth.$state.loggedIn">
                 <span class="nav-line-1"></span>
                 <span class="nav-line-2">Orders</span>
               </nuxt-link>
@@ -119,7 +118,11 @@ export default {
     Search
   },
   computed: {
-    ...mapGetters(["getCartLength"])
+    ...mapGetters(["getCartLength", "isAuthenticated"]),
+
+  },
+  mounted() {
+    console.log('$auth.$state.loggedIn:', this.$auth.$state.loggedIn);
   }
 };
 </script>

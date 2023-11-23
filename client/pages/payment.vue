@@ -34,12 +34,12 @@
             <div class="a-section">
               <h2>Make a payment</h2>
               <div class="a-section a-spacing-none a-spacing-top-small">
-                <b>The total price is ${{ formatPrice(getCartTotalPriceWithShipping)  }}</b>
+                <b>The total price is ${{ formatPrice(getCartTotalPriceWithShipping) }}</b>
               </div>
 
               <!-- Error message  -->
               <div class="a-section a-spacing-none a-spacing-top-small">
-                <b>Error</b>
+                <!-- <b>Error</b> -->
               </div>
               <form action="#" method="post">
                 <div class="a-spacing-medium a-spacing-top-medium">
@@ -125,7 +125,7 @@ export default {
       }
     },
     formatPrice(value) {
-      let val = (value/1).toFixed(2).replace('.', ',')
+      let val = (value / 1).toFixed(2).replace('.', ',')
       return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
     }
   }
@@ -144,13 +144,15 @@ export default {
   -webkit-transition: box-shadow 150ms ease;
   transition: box-shadow 150ms ease;
 }
+
 .StripeElement--focus {
   box-shadow: 0 1px 3px 0 #cfd7df;
 }
+
 .StripeElement--invalid {
   border-color: #fa755a;
 }
+
 .StripeElement--webkit-autofill {
   background-color: #fefde5 !important;
-}
-</style>
+}</style>

@@ -7,7 +7,7 @@
         <ul class="a-unordered-list a-horizontal a-size-small">
           <li>
             <span class="a-list-item">
-              <a class="a-link-normal a-color-tertiary" href="#">{{ product.category.type}}</a>
+              <a class="a-link-normal a-color-tertiary" href="#">{{ product.category.type }}</a>
             </span>
           </li>
           <li>
@@ -86,25 +86,15 @@
                 by
                 <a href="#" class="authorName">
                   {{ product.owner.name }}
-                  <i
-                    class="fas fa-chevron-down"
-                    style="font-size: 8px !important; color: #555 !important;"
-                  ></i>
+                  <i class="fas fa-chevron-down" style="font-size: 8px !important; color: #555 !important;"></i>
                 </a> (Author)
               </div>
               <div class="reviewGroup">
-                <no-ssr>
-                  <star-rating
-                    :rating="product.averageRating"
-                    :show-rating="false"
-                    :glow="1"
-                    :border-width="1"
-                    :rounded-corners="true"
-                    :read-only="true"
-                    :star-size="18"
-                    :star-points="[23,2,14,17,0,19,10,34,7,50,23,43,38,50,36,34,46,19,31,17]"
-                  ></star-rating>
-                </no-ssr>
+                <client-only>
+                  <star-rating :rating="product.averageRating" :show-rating="false" :glow="1" :border-width="1"
+                    :rounded-corners="true" :read-only="true" :star-size="18"
+                    :star-points="[23, 2, 14, 17, 0, 19, 10, 34, 7, 50, 23, 43, 38, 50, 36, 34, 46, 19, 31, 17]"></star-rating>
+                </client-only>
               </div>
               <hr style="margin-top: 10px;" />
               <!-- A tags Dummy Data -->
@@ -147,11 +137,7 @@
                           <span class="a-button-inner">
                             <a href="#" class="a-button-text">
                               <span>
-                                <img
-                                  src="/img/audibleLogo.png"
-                                  class="img-fluid"
-                                  style="width: 20px;"
-                                />Audible
+                                <img src="/img/audibleLogo.png" class="img-fluid" style="width: 20px;" />Audible
                               </span>
                               <br />
                               <span class="a-color-secondary">-</span>
@@ -226,9 +212,7 @@
 
                     <!-- Product Price -->
                     <div class="float-right">
-                      <span
-                        class="a-size-medium a-color-price offer-price a-text-normal"
-                      >${{ product.price }}</span>
+                      <span class="a-size-medium a-color-price offer-price a-text-normal">${{ product.price }}</span>
                     </div>
                   </div>
                 </div>
@@ -256,7 +240,7 @@
                   <div class="a-section a-spacing-none">
                     <span class="a-size-medium a-color-success">In Stock</span>
                   </div>
-                  <div class="a-section a-spacing-mini">Ships from and sold by Amazon.com</div>
+                  <div class="a-section a-spacing-mini">Ships from and sold by EthadZone.com</div>
                 </div>
 
                 <div class="a-section">

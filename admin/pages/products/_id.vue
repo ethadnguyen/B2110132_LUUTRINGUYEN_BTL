@@ -1,113 +1,91 @@
 <template>
   <main>
+    <Navbar />
     <div class="container-fluid">
-      <div class="row">
-        <div class="col-sm-3"></div>
-        <div class="col-sm-6">
-          <div class="a-section">
-            <div class="a-spacing-top-medium"></div>
-            <h2 style="text-align: center">Update {{ product.title }}</h2>
-            <form>
-              <!-- Category Dropdown -->
-              <div class="a-spacing-top-medium">
-                <label>Category</label>
-                <select class="a-select-option" v-model="categoryID">
-                  <option
-                    v-for="category in categories"
-                    :value="category._id"
-                    :key="category._id"
-                  >{{ category.type }}</option>
-                </select>
-              </div>
+      <div class="row"></div>
+      <div class="col-sm-3"></div>
+      <div class="col-sm-6">
+        <div class="a-section">
+          <div class="a-spacing-top-medium"></div>
+          <h2 style="text-align: center">Update {{ product.title }}</h2>
+          <form>
+            <!-- Category Dropdown -->
+            <div class="a-spacing-top-medium">
+              <label>Category</label>
+              <select class="a-select-option" v-model="categoryID">
+                <option v-for="category in categories" :value="category._id" :key="category._id">{{ category.type }}
+                </option>
+              </select>
+            </div>
 
-              <!-- Owner Dropdown -->
-              <div class="a-spacing-top-medium">
-                <label>Owner</label>
-                <select class="a-select-option" v-model="ownerID">
-                  <option
-                    v-for="owner in owners"
-                    :value="owner._id"
-                    :key="owner._id"
-                  >{{ owner.name }}</option>
-                </select>
-              </div>
-              <!-- Title input -->
-              <div class="a-spacing-top-medium">
-                <label style="margin-bottom: 0px;">Title</label>
-                <input
-                  type="text"
-                  class="a-input-text"
-                  style="width: 100%"
-                  v-model="title"
-                  :placeholder="product.title"
-                />
-              </div>
+            <!-- Owner Dropdown -->
+            <div class="a-spacing-top-medium">
+              <label>Owner</label>
+              <select class="a-select-option" v-model="ownerID">
+                <option v-for="owner in owners" :value="owner._id" :key="owner._id">{{ owner?.name }}</option>
+              </select>
+            </div>
+            <!-- Title input -->
+            <div class="a-spacing-top-medium">
+              <label style="margin-bottom: 0px;">Title</label>
+              <input type="text" class="a-input-text" style="width: 100%" v-model="title" :placeholder="product.title" />
+            </div>
 
-              <!-- Price input -->
-              <div class="a-spacing-top-medium">
-                <label style="margin-bottom: 0px;">Price</label>
-                <input
-                  type="number"
-                  class="a-input-text"
-                  style="width: 100%"
-                  v-model="price"
-                  :placeholder="product.price"
-                />
-              </div>
+            <!-- Price input -->
+            <div class="a-spacing-top-medium">
+              <label style="margin-bottom: 0px;">Price</label>
+              <input type="number" class="a-input-text" style="width: 100%" v-model="price"
+                :placeholder="product.price" />
+            </div>
 
-              <!-- StockQuantity input -->
-              <div class="a-spacing-top-medium">
-                <label style="margin-bottom: 0px;">Stock Quantity</label>
-                <input
-                  type="number"
-                  class="a-input-text"
-                  style="width: 100%"
-                  v-model="stockQuantity"
-                  :placeholder="product.stockQuantity"
-                />
-              </div>
+            <!-- StockQuantity input -->
+            <div class="a-spacing-top-medium">
+              <label style="margin-bottom: 0px;">Stock Quantity</label>
+              <input type="number" class="a-input-text" style="width: 100%" v-model="stockQuantity"
+                :placeholder="product.stockQuantity" />
+            </div>
 
-              <!-- Description textarea -->
-              <div class="a-spacing-top-medium">
-                <label style="margin-bottom: 0px;">Description</label>
-                <textarea
-                  style="width: 100%"
-                  v-model="description"
-                  :placeholder="product.description"
-                ></textarea>
-              </div>
+            <!-- Description textarea -->
+            <div class="a-spacing-top-medium">
+              <label style="margin-bottom: 0px;">Description</label>
+              <textarea style="width: 100%" v-model="description" :placeholder="product.description"></textarea>
+            </div>
 
-              <!-- Photo file -->
-              <div class="a-spacing-top-medium">
-                <label style="margin-bottom: 0px;">Add Photo</label>
-                <div class="a-row a-spacing-top-medium">
-                  <label class="choosefile-button">
-                    <i class="fal fa-plus"></i>
-                    <input type="file" @change="onFileSelected" />
-                    <p style="margin-top: -70px">{{ fileName }}</p>
-                  </label>
-                </div>
+            <!-- Photo file -->
+            <div class="a-spacing-top-medium">
+              <label style="margin-bottom: 0px;">Add Photo</label>
+              <div class="a-row a-spacing-top-medium">
+                <label class="choosefile-button">
+                  <i class="fal fa-plus"></i>
+                  <input type="file" @change="onFileSelected" />
+                  <p style="margin-top: -70px">{{ fileName }}</p>
+                </label>
               </div>
-              <!-- Button -->
-              <hr />
-              <div class="a-spacing-top-large">
-                <span class="a-button-register">
-                  <span class="a-button-inner">
-                    <span class="a-button-text" @click="onUpdateProduct">Update product</span>
-                  </span>
+            </div>
+            <!-- Button -->
+            <hr />
+            <div class="a-spacing-top-large">
+              <span class="a-button-register">
+                <span class="a-button-inner">
+                  <span class="a-button-text" @click="onUpdateProduct">Update product</span>
                 </span>
-              </div>
-            </form>
-          </div>
+              </span>
+            </div>
+          </form>
         </div>
-        <div class="col-sm-3"></div>
       </div>
+      <div class="col-sm-3"></div>
+    </div>
     </div>
   </main>
 </template>
 
 <script>
+import Navbar from "@/components/Navbar.vue";
 export default {
+  components: {
+    Navbar
+  },
   async asyncData({ $axios, params }) {
     try {
       let categories = $axios.$get("http://localhost:3001/api/categories");
@@ -141,6 +119,14 @@ export default {
       stockQuantity: "",
       fileName: ""
     };
+  },
+  mounted() {
+    this.categoryID = this.product.categoryID;
+    this.ownerID = this.product.ownerID;
+    this.title = this.product.title;
+    this.price = this.product.price;
+    this.description = this.product.description;
+    this.stockQuantity = this.product.stockQuantity;
   },
   methods: {
     onFileSelected(event) {

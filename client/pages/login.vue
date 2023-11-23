@@ -6,7 +6,7 @@
         <div class="col-sm-4">
           <div class="text-center">
             <nuxt-link to="/">
-              <img src="/img/logo-black.png" />
+              <img src="/img/logo-name.jpg" />
             </nuxt-link>
           </div>
           <form class="mt-4">
@@ -27,7 +27,7 @@
                     class="a-input-text form-control auth-autofocus auth-required-field auth-contact-verification-request-info"
                     v-model="password" />
                   <div class="a-alert-container">
-                    <div class="a-alert-content">Password must be at least 6 characteres</div>
+                    <div class="a-alert-content">Password must be at least 6 characters</div>
                   </div>
                 </div>
                 <!-- Button -->
@@ -39,7 +39,7 @@
                   </span>
                   <div class="a-row a-spacing-top-medium a-size-small">
                     <b>
-                      By creating an account, you agree to Amazon's
+                      By creating an account, you agree to EthadZone's
                       <a href="#">Conditions of Use</a> and
                       <a href="#">Privacy Notice</a>
                     </b>
@@ -62,6 +62,7 @@
 </template>
 
 <script>
+import Swal from "sweetalert2";
 export default {
   middleware: "auth",
   auth: "guest",
@@ -74,18 +75,45 @@ export default {
   },
   methods: {
     async onLogin() {
+      if (!this.email || !this.password) {
+        Swal.fire({
+          icon: 'error',
+          title: 'Validation Error',
+          text: 'Please enter both email and password',
+        });
+        return;
+      }
+
       try {
+        let data = {
+          email: this.email,
+          password: this.password
+        };
+        let response = await this.$axios.$post("/api/auth/login", data);
+        console.log(response);
         this.$auth.loginWith("local", {
           data: {
             email: this.email,
             password: this.password
           }
         });
+        Swal.fire({
+          icon: 'success',
+          title: 'Login Success',
+          text: 'You have successfully logged in',
+        });
+        this.$auth.$state.loggedIn = true
         this.$router.push("/");
-      } catch (err) {
+      }
+      catch (err) {
+        Swal.fire({
+          icon: 'error',
+          title: 'Login Failed',
+          text: 'Incorrect email or password',
+        });
         console.log(err);
       }
     }
-  }
+  },
 };
 </script>
