@@ -49,7 +49,7 @@ export default {
     redirect: {
       callback: '/callback',
       home: '/home',
-      login: '/login',
+      login: '/',
     },
     localStorage: false,
     strategies: {
