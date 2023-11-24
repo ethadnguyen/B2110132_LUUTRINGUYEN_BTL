@@ -15,7 +15,12 @@
       <div class="a-spacing-large"></div>
       <div class="container-fluid browsing-history">
         <div class="row">
-          <div v-for="(product, index) in products" :key="product._id"
+          <div class="col-sm-12">
+            <input type="text" v-model="searchQuery" placeholder="Search products" />
+          </div>
+        </div>
+        <div class="row">
+          <div v-for="(product, index) in filteredProducts" :key="product._id"
             class="col-xl-2 col-lg-2 col-md-3 col-sm-6 col-6 br bb">
             <div class="history-box">
               <!-- Product image -->
@@ -70,11 +75,10 @@ export default {
     Navbar
   },
   middleware: ['auth'],
-  methods: {
-    logout() {
-      this.$auth0.logout({
-        returnTo: window.location.origin + process.env.AUTH0_CALLBACK_ROUTE
-      })
+  data() {
+    return {
+      searchQuery: '',
+      products: []
     }
   },
   async asyncData({ $axios }) {
@@ -86,7 +90,19 @@ export default {
       };
     } catch (err) { }
   },
+  computed: {
+    filteredProducts() {
+      return this.products.filter(product => {
+        return product.title.toLowerCase().includes(this.searchQuery.toLowerCase());
+      });
+    }
+  },
   methods: {
+    logout() {
+      this.$auth0.logout({
+        returnTo: window.location.origin + process.env.AUTH0_CALLBACK_ROUTE
+      })
+    },
     async onDeleteProduct(id, index) {
       try {
         const result = await Swal.fire({
@@ -119,5 +135,4 @@ export default {
   }
 };
 </script>
-
 <style></style>
